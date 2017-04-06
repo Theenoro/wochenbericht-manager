@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Wochenberichte</title>
+    <link href="./../assets/css/bootstrap.css" rel="stylesheet">
+    <!--<link href="./../assets/css/bootstrap-theme-flat.css" rel="stylesheet">-->
+    <link href="https://bootswatch.com/yeti/bootstrap.min.css" rel="stylesheet">
+    <link href="./../assets/css/bootstrap-side.css" rel="stylesheet">
+    <link href="./../assets/css/bootstrap-update.css" rel="stylesheet">
+    <link href="./../assets/css/application.css" rel="stylesheet">
+    <script src="./../assets/js/jquery-3.1.1.min.js"></script>
+    <script src="./../assets/js/bootstrap.js"></script>
+    <link href="./../assets/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="titlebar">
+            <div class="">
+                <div class="col-md-11" style="  -webkit-user-select: none;
+              -webkit-app-region: drag;">
+                    <span class="left">
+                <img src="./../assets/img/icon.ico"/> Wochenberichtmanager
+              </span>
+            </div>
+            <div class="col-md-1 right">
+                <button class="closeWin btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+    </div>
+    <div class="mail-box">
+        <aside class="sm-side">
+            <div class="user-head">
+                <a class="inbox-avatar" href="javascript:;" style="display:none;">
+                    <img width="64" height="60" src="">
+                </a>
+                <div class="user-name">
+                    <h5><a href="#" id="yourName">Vor- & Nachname</a></h5>
+                    <span><a href="#" id="yourEmail"></a></span>
+                </div>
+            </div>
+            <div class="inbox-body">
+                <a href="#report" data-toggle="modal" title="Compose" id="reportCreate" class="btn btn-compose">
+                        Erstellen
+                    </a>
+                <!-- Modal -->
+                <div aria-hidden="true" aria-labelledby="reportLabel" role="dialog" tabindex="-1" id="report" class="modal fade" style="display: none;">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <form>
+                            <input type="hidden" id="uuid" value="">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Bericht <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!--  START -->
+                                    <div class="tabbable tabs-left clearfix">
+                                        <div class="col-md-2">
+                                            <ul id="reporttabs" class="nav nav-tabs nav-stacked">
+                                                <li class="active"><a href="#allovers" data-toggle="tab">Allgemein</a></li>
+                                                <li><a href="#monday" data-toggle="tab">Montag</a></li>
+                                                <li><a href="#tuesday" data-toggle="tab">Dienstag</a></li>
+                                                <li><a href="#wednesday" data-toggle="tab">Mittwoch</a></li>
+                                                <li><a href="#thursday" data-toggle="tab">Donnerstag</a></li>
+                                                <li><a href="#friday" data-toggle="tab">Freitag</a></li>
+                                                <!--<li><a href="#" data-toggle="tab">Dienstag</a></li>-->
+                                            </ul>
+                                        </div>
+                                        <div id="myTabContent" class="tab-content col-md-10">
+                                            <div class="tab-pane fade active in" id="allovers">
+                                                <p>INFO</p>
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            Berichtsnummer
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="number" id="number" class="form-control ">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            Start Datum
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="date" id="startDate" class="form-control" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            End Datum
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="date" id="endDate" class="form-control " />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          Benutzen als generierungs Template:
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <button id="reportAsTemplate" class="btn" type="button"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="monday">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <label>Begonnen:</label> <input type="time" class="start form-control" /> <label>Abgeschlossen:</label> <input type="time" class="end form-control" /> <label>Pause:</label> <input type="time" class="break form-control"
+                                                        />
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group task">
+                                                                    <input type="text" class="daystasks form-control" placeholder="Tätigkeit">
+                                                                    <span class="input-group-btn">
+                                                                       <button class="btn btn-danger delete" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                                                     </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group addtask">
+                                                                    <input type="text" class="form-control" disabled="" placeholder="Tätigkeit hinzufügen...">
+                                                                    <span class="input-group-btn">
+                                                                       <button class="btn btn-success add" type="button" tabindex="-1"><i class="fa fa-plus"></i></button>
+                                                                     </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="tuesday">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <label>Begonnen:</label> <input type="time" class="start form-control" /> <label>Abgeschlossen:</label> <input type="time" class="end form-control" /> <label>Pause:</label> <input type="time" class="break form-control"
+                                                        />
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group task">
+                                                                    <input type="text" class="daystasks form-control" placeholder="Tätigkeit">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-danger delete" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group addtask">
+                                                                    <input type="text" class="form-control" disabled="" placeholder="Tätigkeit hinzufügen...">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-success add" type="button" tabindex="-1"><i class="fa fa-plus"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="wednesday">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <label>Begonnen:</label> <input type="time" class="start form-control" /> <label>Abgeschlossen:</label> <input type="time" class="end form-control" /> <label>Pause:</label> <input type="time" class="break form-control"/>
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group task">
+                                                                    <input type="text" class="daystasks form-control" placeholder="Tätigkeit">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-danger delete" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group addtask">
+                                                                    <input type="text" class="form-control" disabled="" placeholder="Tätigkeit hinzufügen...">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-success add" type="button" tabindex="-1"><i class="fa fa-plus"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="thursday">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <label>Begonnen:</label> <input type="time" class="start form-control" /> <label>Abgeschlossen:</label> <input type="time" class="end form-control" /> <label>Pause:</label> <input type="time" class="break form-control"
+                                                        />
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group task">
+                                                                    <input type="text" class="daystasks form-control" placeholder="Tätigkeit">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-danger delete" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group addtask">
+                                                                    <input type="text" class="form-control" disabled="" placeholder="Tätigkeit hinzufügen...">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-success add" type="button" tabindex="-1"><i class="fa fa-plus"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="friday">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <label>Begonnen:</label> <input type="time" class="start form-control" /> <label>Abgeschlossen:</label> <input type="time" class="end form-control" /> <label>Pause:</label> <input type="time" class="break form-control"
+                                                        />
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group task">
+                                                                    <input type="text" class="daystasks form-control" placeholder="Tätigkeit">
+                                                                    <span class="input-group-btn">
+                                                                     <button class="btn btn-danger delete" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                                                   </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group addtask">
+                                                                    <input type="text" class="form-control" disabled="" placeholder="Tätigkeit hinzufügen...">
+                                                                    <span class="input-group-btn">
+                                                   <button class="btn btn-success add" type="button" tabindex="-1"><i class="fa fa-plus"></i></button>
+                                                 </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-info" id="printSingle"><i class="fa fa-print" aria-hidden="true"></i> Drucken</button>
+                                    <button type="reset" class="btn btn-danger" id="reportReset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
+                                    <button type="button" class="btn btn-danger" id="reportDelete"><i class="fa fa-trash" aria-hidden="true"></i> Löschen</button>
+                                    <button type="button" class="btn btn-success" id="reportSave"><i class="fa fa-floppy-o" aria-hidden="true"></i> Speichern</button>
+                                </div>
+                                <!-- END -->
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <ul class="inbox-nav inbox-divider" id="tab-loader">
+                <li class="active">
+                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-inbox"></i> Berichte</a>
+                </li>
+                <li>
+                    <a href="#tasks" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-envelope-o"></i> Tätigkeiten</a>
+                </li>
+                <!--<li>
+                    <a href="#stats" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-bookmark-o"></i> Statistik</a>
+                </li>-->
+                <li>
+                    <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-cog"></i> Einstellungen</a>
+                </li>
+                <li>
+                    <a href="#infos" aria-controls="infos" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i>  Info</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
+                <li>
+                    <h4>Datei</h4> </li>
+                <li id="newdb">
+                    <a href="#"> <i class=" fa fa-sign-blank text-danger"></i><i class="fa fa-sticky-note" aria-hidden="true"></i> Neu </a>
+                </li>
+                <li id="loaddb">
+                    <a href="#"> <i class=" fa fa-sign-blank text-success"></i><i class="fa fa-folder-open" aria-hidden="true"></i> Laden </a>
+                </li>
+            </ul>
+
+        </aside>
+        <aside class="lg-side">
+            <div role="tabpanel" class="main-win tab-pane active" id="home">
+                <div class="inbox-head">
+                    <h3>Berichte</h3>
+                </div>
+                <div class="inbox-body">
+                    <div class="mail-option">
+                        <div class="chk-all">
+                            <input type="checkbox" class="mail-checkbox mail-group-checkbox">
+                            <div class="btn-group">
+                                <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+
+                                    <i class="fa fa-angle-down "></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" id="printAll"> Drucken</a></li>
+                                    <li><a href="#"> Read</a></li>
+                                    <li><a href="#"> Unread</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="btn-group">
+                            <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+                                <i class=" fa fa-refresh"></i>
+                            </a>
+                        </div>
+                      -->
+
+                    </div>
+                    <div class="inwin">
+                        <table class="table table-inbox table-hover">
+                            <tbody id="reportList">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="main-win tab-pane" id="tasks">
+                <div class="inbox-head">
+                    <h3>Tätigkeiten</h3>
+                </div>
+                <div class="inbox-body">
+                  <div class="modal fade" id="selectTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Template wählen:</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div id="tmpSelect" class="">
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-md-5">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        Aktiviere Zufallstätigkeiten für :<br/>
+                                        <div class="checkbox">
+                                            <label for="zt-week-0">
+                              <input type="checkbox" name="zt-week" id="zt-week-0" value="1">
+                              Montag
+                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label for="zt-week-1">
+                              <input type="checkbox" name="zt-week" id="zt-week-1" value="2">
+                              Dienstag
+                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label for="zt-week-2">
+                              <input type="checkbox" name="zt-week" id="zt-week-2" value="3">
+                              Mittwoch
+                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label for="zt-week-3">
+                              <input type="checkbox" name="zt-week" id="zt-week-3" value="4">
+                              Donnerstag
+                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label for="zt-week-4">
+                                            <input type="checkbox" name="zt-week" id="zt-week-4" value="5">
+                                            Freitag
+                                          </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label" for="zt-startDate">Start Datum</label>
+                                    <div class="col-md-7">
+                                        <input id="zt-startDate" name="zt-startDate" type="date" placeholder="2017-08-01" class="form-control">
+
+                                    </div>
+                                </div>
+                                <br/>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-5 control-label" for="zt-endDate">End Datum</label>
+                                    <div class="col-md-7">
+                                        <input id="zt-endDate" name="zt-endDate" type="date" placeholder="2017-08-07" class="form-control">
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <button type="button" id="openSelectTmp" class="btn btn-primary col-md-6" data-toggle="modal" data-target="#selectTemplate">
+                                  Template wählen:
+                                </button>
+                                <button id="zt-gen" class="btn btn-info col-md-6">Generieren</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#taskview" aria-controls="taskview" role="tab" data-toggle="tab">Tätigkeiten</a></li>
+                          <li role="presentation"><a href="#tasknumview" aria-controls="tasknumview" role="tab" data-toggle="tab">Tätigkeiten / Tag</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                          <div role="tabpanel" class="tab-pane active" id="taskview">
+                            <table class="table table-bordered table-hover">
+                              <tr><th>Tätigkeit</th><th class="col-md-3">Gewichtung</th><th class="col-md-1"></th></tr>
+                              <tr class="zt-week-random">
+                                <td><input type="text" class="zt-week-random-task form-control"></td>
+                                <td><input type="number" class="zt-week-random-task-h form-control col-md-3"></td>
+                                <td><buttom type="button" class="btn btn-danger zt-rem-task" ><i class="fa fa-minus" aria-hidden="true"></i></button></td>
+                              </tr>
+                              <tr class="zt-week-random-dis">
+                                <td><input type="text" class="zt-week-random-task form-control" value="Tätigkeit" disabled></td>
+                                <td><input type="number" disabled class="zt-week-random-task-h form-control col-md-3" value="1"></td>
+                                <td><buttom type="button" class="btn btn-success" id="zt-add-task"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                              </tr>
+                            </table>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="tasknumview">
+                            <table class="table table-bordered table-hover">
+                              <tr><th>Anzahl</th><th>Gewichtung</th><th class="col-md-1"></th></tr>
+                              <tr class="zt-tvn-c">
+                                <td><input class="form-control zt-tvn-num" type="number" step="1" min="1" max="100"/></td>
+                                <td><input class="form-control zt-tvn-weight" type="number" step="1" min="1" max="100"/></td>
+                                <td><button class="btn btn-danger del-tvn-this">X</button></td>
+                              </tr>
+                              <tr class="tnv-dis">
+                                <td><input class="form-control" type="number" disabled step="1" min="1" max="100" value="0"/></td>
+                                <td><input class="form-control" type="number" disabled step="1" min="1" max="100" value="0"/></td>
+                                <td><button class="btn btn-success add-tvn-this">+</button></td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!--
+                      <a class="btn btn-primary" role="button" data-toggle="collapse" href="#taskview" aria-expanded="false" aria-controls="collapseExample">
+                        Tätigkeiten
+                      </a>
+                      <a class="btn btn-primary" role="button" data-toggle="collapse" href="#tasknumview" aria-expanded="false" aria-controls="collapseExample">
+                        Anzahl der täglichen Tätigkeiten
+                      </a>
+
+                    -->
+                      <div class="collapse" id="tasknumview">
+                          NUM OF TASKS
+                      </div>
+
+                      <div class="collapse" id="taskview">
+                        <div class="well">
+                          <div class="panel">
+                              <div class="panel-body">
+                                  <!-- -->
+
+                              </div>
+                              ...
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="main-win tab-pane" id="stats">
+                <div class="inbox-head">
+                    <h3>Statistik</h3>
+                </div>
+                <div class="inbox-body">
+                    <div class="well">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> SOON
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="main-win tab-pane" id="settings">
+                <div class="inbox-head">
+                    <h3>Einstellungen</h3>
+                </div>
+                <div class="inbox-body">
+                    <form>
+                        <div class="">
+                            <button class="btn btn-success" type="button" id="saveSettings">Speichern</button>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="realname">Name</label>
+                            <div class="col-md-8">
+                                <input id="realname" name="realname" type="text" placeholder="Max Mustermann" class="form-control input-md" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="realname">Start Datum:</label>
+                            <div class="col-md-8">
+                                <input id="sstartDate" name="startDate" type="date" placeholder="01-08-2017" class="form-control input-md" required="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="main-win tab-pane" id="infos">
+              <div class="inbox-head">
+                  <h3>Info</h3>
+              </div>
+              <div class="inbox-body">
+                made by Luca Jäntsch ( Theenoro )<br/>
+                Website:
+                  <a id="web" href="https://thee.moe">https://thee.moe</a><br/>
+                Source:
+                  <a id="github" href="https://github.com/Theenoro/wochenbericht-manager"><i class="fa fa-github" aria-hidden="true"></i> GitHub</a>
+
+                <div class="well">
+
+                    Copyright (c) 2017 <a id="web" href="https://thee.moe">Luca Jäntsch</a>
+                    <br/>
+                    GER:
+                    <p>
+                      Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält, die Erlaubnis erteilt, sie uneingeschränkt zu nutzen, inklusive und ohne Ausnahme mit dem Recht, sie zu verwenden, zu kopieren, zu verändern, zusammenzufügen, zu veröffentlichen, zu verbreiten, zu unterlizenzieren und/oder zu verkaufen, und Personen, denen diese Software überlassen wird, diese Rechte zu verschaffen, unter den folgenden Bedingungen:
+
+                      Der obige Urheberrechtsvermerk und dieser Erlaubnisvermerk sind in allen Kopien oder Teilkopien der Software beizulegen.
+
+                      DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER IMPLIZIERTE GARANTIE BEREITGESTELLT, EINSCHLIESSLICH DER GARANTIE ZUR BENUTZUNG FÜR DEN VORGESEHENEN ODER EINEM BESTIMMTEN ZWECK SOWIE JEGLICHER RECHTSVERLETZUNG, JEDOCH NICHT DARAUF BESCHRÄNKT. IN KEINEM FALL SIND DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE ANSPRÜCHE HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG EINES VERTRAGES, EINES DELIKTES ODER ANDERS IM ZUSAMMENHANG MIT DER SOFTWARE ODER SONSTIGER VERWENDUNG DER SOFTWARE ENTSTANDEN.
+                    </p>
+                    ENG:
+                    <p>
+                      Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+                      The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+                      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                  </p>
+                </div>
+                <p>Used Bootstrap, jQuery, Handlebars, Electron, Font Awesome</p>
+                <p>Maindesign made with:</p>
+                <ul>
+                <li><a href="http://bootsnipp.com/snippets/featured/responsive-mail-inbox-and-compose">http://bootsnipp.com/snippets/featured/responsive-mail-inbox-and-compose</a></li>
+                <li><a href="http://bootsnipp.com/snippets/featured/status-bar">http://bootsnipp.com/snippets/featured/status-bar</a></li>
+                </ul>
+              </div>
+            </div>
+        </aside>
+    </div>
+    </div>
+    <div id="alertbox">
+    </div>
+    <script id="zt-tvn" type="text/x-handlebars-template">
+      <tr class="zt-tvn-c">
+        <td><input class="form-control zt-tvn-num" type="number" step="1" min="1" max="100"/></td>
+        <td><input class="form-control zt-tvn-weight" type="number" step="1" min="1" max="100"/></td>
+        <td><button class="btn btn-danger del-tvn-this">X</button></td>
+      </tr>
+    </script>
+    <script id="zt-task" type="text/x-handlebars-template">
+      <tr class="zt-week-random">
+        <td><input type="text" class="zt-week-random-task form-control"></td>
+        <td><input type="number" class="zt-week-random-task-h form-control col-md-3"></td>
+        <td><buttom type="button" class="btn btn-danger zt-rem-task" ><i class="fa fa-minus" aria-hidden="true"></i></button></td>
+      </tr>
+    </script>
+    <script id="alert-template" type="text/x-handlebars-template">
+        <div class="row {{auuid}}">
+            <div class="col-md-12">
+                <div class="update-nag">
+                    <div class="update-split {{type}}"><i class="{{icon}}"></i></div>
+                    <div class="update-text">{{text}}</div>
+                </div>
+            </div>
+    </script>
+    <script id="entry-template" type="text/x-handlebars-template">
+        <tr>
+            <td class="" data-id="{{_id}}" class="inbox-small-cells">
+                <input type="checkbox" data-id="{{_id}}"  class="mail-checkbox">
+            </td>
+            <td data-id="{{_id}}" class="entry inbox-small-cells"></td>
+            <td data-id="{{_id}}" class="entry view-message ">{{start}} - {{end}}</td>
+        </tr>
+    </script>
+    <script src="./../assets/js/application.js"></script>
+</body>
+</html>

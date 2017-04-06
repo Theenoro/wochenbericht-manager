@@ -1,0 +1,53 @@
+*{
+  border-radius: 0 !important;
+}
+html{
+  border:1px solid #454545;
+  overflow-y: hidden;
+}
+.container-fluid{
+  padding:0;
+}
+body,html{
+  height:calc( 100vh );
+  padding-right: 0 !important;
+}
+.titlebar{
+  height:45px;
+  line-height: 40px;
+  background: #017880;
+  color: #FFF;
+}
+.titlebar img{
+  position: absolute;
+  left: 12px;
+  top: -13px;
+}
+.mail-box{
+  height:calc( 100vh - 45px - 2px);
+}
+#alertbox{
+  position: fixed;
+  z-index: 9999;
+  bottom: 10px;
+  right: 10px;
+  text-align: right;
+}
+.left{
+  text-align: left;
+  margin-left:70px;
+
+}
+.right{
+  text-align: right;
+  padding-right: 0;
+}
+.inwin{
+  overflow-y: scroll;
+  height: calc( 100vh - 175px - 45px - 2px);
+  box-shadow: inset 0px 0px 2px rgba(69, 69, 69, 0.26);
+}
+.main-win.tab-pane {
+    height: calc( 100vh - 51px);
+    overflow-y: auto;
+}

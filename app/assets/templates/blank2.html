@@ -1,0 +1,9 @@
+{{week.start}}
+{% for name, item in week.days %}
+  {% for task in item.tasks %}
+    <li>{{ name }}: {{ task }}</li>
+  {% endfor %}
+{% else %}
+  {{week}}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
