@@ -51,6 +51,7 @@ const $tmp_entry    = Handlebars.compile($("#entry-template").html());
 const $tmp_alert    = Handlebars.compile($("#alert-template").html());
 const $tmp_zt_task    = Handlebars.compile($("#zt-task").html());
 const $tmp_zt_tvn    = Handlebars.compile($("#zt-tvn").html());
+const $tmp_tmp       = Handlebars.compile($('#template-template').html())
 
 
 /** CLOSE BUTTON */
@@ -259,6 +260,7 @@ $reportDelete.click(()=>{
   if(typeof this_week._id != "undefined"){
     db.remove({ _id: this_week._id }, {}, function (err, numRemoved) {
       loadEntrys();
+      $('#report > div > form > div > div.modal-header > button').click();
     });
   }else{
     $reportReset.click();
@@ -291,12 +293,32 @@ $body.delegate('#tmpSelect .entry','click',(event)=>{
 });
 $('#openSelectTmp').click(()=>{
   $('#tmpSelect').html("");
-  db.find({flag:'report',istemplate:"true"}).sort({ start: -1 }).exec((err,docs)=>{
-    for(doc in docs){
-      var html = $tmp_entry(docs[doc])
-      $('#tmpSelect').append(html)
+  if(db === null){
+    $('#tmpSelect').html(`<div class="alert alert-danger" role="alert">
+    <i class="fa fa-exclamation" aria-hidden="true"></i>
+    Bitte Datei laden / neu erstellen.
+    </div>`);
+    return;
+  }
+  db.find({flag:'report',istemplate:"true"},(err)=>{
+    if(err === true){
+      $('#tmpSelect').html(`<div class="alert alert-danger" role="alert">
+      <i class="fa fa-exclamation" aria-hidden="true"></i>
+      Keine Template gefunden. Einfach auf "Erstellen" drücken und als Template einstellen.
+      </div>`);
+    }else{
+      db.find({flag:'report',istemplate:"true"}).sort({ start: -1 }).exec((err,docs)=>{
+        console.log('TEST')
+        $('#tmpSelect').html('<table id="tmptable" class="table table-inbox table-hover"></table>');
+        for(doc in docs){
+          var html = $tmp_tmp(docs[doc])
+          $('#tmptable').append(html)
+        }
+      });
+
+
     }
-  });
+  })
 });
 $printSingle.click(()=>{
   $reportSave.click();
@@ -379,8 +401,13 @@ function loadEntry(id){
 // settings
 
 $saveSettings.click(()=>{
+  if(db === null){
+    new alert('Keine Datei geladen!','fa fa-exclamation-triangle','danger');
+    return;
+  }
   settings.name = $('#realname').val();
   settings.startDate = $('#sstartDate').val();
+
   db.update({ flag: 'settings' }, { settings : settings,flag:'settings' } , {}, function () {
     updateFromSettings()
     new alert('Einstellungen gespeichert!','fa fa-exclamation-triangle','success');
@@ -428,6 +455,7 @@ $('#printAll').click(()=>{
         new alert('PDF erstellen!','fa fa-exclamation-triangle','success');
         if(path === ""){
           new alert('Pfad ist leer!','fa fa-exclamation-triangle','danger');
+          return;
         }else{
           //console.log(JSON.parse(JSON.stringify(this_week)));
           var template2 = nunjucks.compile(html);
@@ -454,7 +482,10 @@ $('#printAll').click(()=>{
 
 
 $('#zt-gen').click(()=>{
-
+  if(db === null){
+    new alert('Kann nicht generiert werden da keine Datei geladen wurde!','fa fa-exclamation-triangle','danger');
+    return;
+  }
   var z = $('.zt-week-random').length;
   var tasks = [];
   for(var i = 0;i<z;i++){

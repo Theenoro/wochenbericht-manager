@@ -45,7 +45,7 @@
                     <img width="64" height="60" src="">
                 </a>
                 <div class="user-name">
-                    <h5><a href="#" id="yourName">Vor- & Nachname</a></h5>
+                    <h5><span id="yourName">Vor- & Nachname</span></h5>
                     <span><a href="#" id="yourEmail"></a></span>
                 </div>
             </div>
@@ -314,8 +314,6 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" id="printAll"> Drucken</a></li>
-                                    <li><a href="#"> Read</a></li>
-                                    <li><a href="#"> Unread</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -604,6 +602,13 @@
             <td class="" data-id="{{_id}}" class="inbox-small-cells">
                 <input type="checkbox" data-id="{{_id}}"  class="mail-checkbox">
             </td>
+            <td data-id="{{_id}}" class="entry inbox-small-cells"></td>
+            <td data-id="{{_id}}" class="entry view-message ">{{start}} - {{end}}</td>
+        </tr>
+    </script>
+    <script id="template-template" type="text/x-handlebars-template">
+        <tr>
+            <td data-id="{{_id}}" class="entry view-message"> Template</td>
             <td data-id="{{_id}}" class="entry inbox-small-cells"></td>
             <td data-id="{{_id}}" class="entry view-message ">{{start}} - {{end}}</td>
         </tr>
