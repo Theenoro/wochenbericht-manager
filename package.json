@@ -1,13 +1,15 @@
 {
   "name": "wochenbericht-manager",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Wochenbericht Manager",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=app/assets/img/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Thee.moe --version-string.FileDescription=Thee.moe --version-string.ProductName=\"Wochenberichtmanager\"",
     "package-all": "electron-packager . --overwrite --asar=true --all --icon=app/assets/img/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Thee.moe --version-string.FileDescription=Thee.moe --version-string.ProductName=\"Wochenberichtmanager\"",
-    "package-linux": "electron-packager . --overwrite --asar=true --plattform=linux --arch=x64 --icon=app/assets/img/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Thee.moe --version-string.FileDescription=Thee.moe --version-string.ProductName=\"Wochenberichtmanager\""
+    "package-linux": "electron-packager . --overwrite --asar=true --plattform=linux --arch=x64 --icon=app/assets/img/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Thee.moe --version-string.FileDescription=Thee.moe --version-string.ProductName=\"Wochenberichtmanager\"",
+    "build": "electron-packager . app --platform win32 --overwrite --asar=true --arch x64 --out dist/ --icon=app/assets/img/icon.ico --prunte=true --version-string.CompanyName=Thee.moe --version-string.ProductName=\"Wochenberichtmanager\" ",
+    "setup": "node dist/makewinInstall.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,9 @@
   "devDependencies": {
     "devtron": "^1.4.0",
     "electron": "^1.6.2",
-    "electron-packager": "^8.5.2"
+    "electron-installer-windows": "^0.2.0",
+    "electron-packager": "^8.5.2",
+    "electron-winstaller": "^2.5.2"
   },
   "dependencies": {
     "chance": "^1.0.6",
